@@ -24,4 +24,8 @@ public class IngredientDao extends AbstractDAO<Ingredient> {
     public Ingredient save(Ingredient ingredient) {
         return persist(ingredient);
     }
+
+    public void delete(Ingredient ingredient) {
+        currentSession().delete(ingredient);
+    }
 }

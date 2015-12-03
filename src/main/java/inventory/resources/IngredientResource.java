@@ -42,6 +42,14 @@ public class IngredientResource {
             ingredientDao.save(ingredient);
     }
 
+    @DELETE
+    @UnitOfWork
+    @Path("/{id}")
+    public void delete(@PathParam("id") long id) {
+        Ingredient ingredient = findSafely(id);
+        ingredientDao.delete(ingredient);
+    }
+
     private Ingredient findSafely(long id) {
         final Optional<Ingredient> ingredient = ingredientDao.findById(id);
         if (!ingredient.isPresent()) {
