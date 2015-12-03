@@ -1,10 +1,8 @@
 package inventory.resources;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
 import inventory.db.IngredientDao;
 import inventory.model.Ingredient;
-import io.dropwizard.jackson.Jackson;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +26,6 @@ import static org.mockito.Mockito.when;
 public class IngredientResourceTest {
 
     private static final IngredientDao dao = mock(IngredientDao.class);
-    private static final ObjectMapper MAPPER = Jackson.newObjectMapper();
 
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()

@@ -24,11 +24,6 @@ public class Ingredient {
     @Enumerated(EnumType.STRING)
     private IngredientType ingredientType;
 
-//    @JsonIgnoreProperties
-//    public boolean isValid() {
-//        return name != null && ingredientType != null;
-//    }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -43,7 +38,7 @@ public class Ingredient {
     }
 
     public enum IngredientType {
-        MALT, HOP, YEAST;
+        MALT, HOP, YEAST, OTHER
     }
 
 

@@ -13,6 +13,21 @@ public class InventoryConfiguration extends Configuration {
     @NotNull
     private DataSourceFactory database = new DataSourceFactory();
 
+    @NotNull
+    private String login;
+
+    @NotNull
+    private String password;
+
+    @JsonProperty
+    public String getLogin() {
+        return login;
+    }
+    @JsonProperty
+    public String getPassword() {
+        return password;
+    }
+
     @JsonProperty("database")
     public DataSourceFactory getDataSourceFactory() {
         return database;

@@ -5,6 +5,7 @@ import inventory.model.Ingredient;
 import inventory.db.IngredientDao;
 import io.dropwizard.hibernate.UnitOfWork;
 
+import javax.annotation.security.PermitAll;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -24,6 +25,7 @@ public class IngredientResource {
     @Path("/{id}")
     @UnitOfWork
     @Timed
+    @PermitAll
     public Ingredient getIngredient(@PathParam("id") long id) {
         return findSafely(id);
     }
@@ -31,6 +33,7 @@ public class IngredientResource {
     @GET
     @UnitOfWork
     @Timed
+    @PermitAll
     public List<Ingredient> findAll() {
         return ingredientDao.findAll();
     }
@@ -38,6 +41,7 @@ public class IngredientResource {
     @POST
     @UnitOfWork
     @Timed
+    @PermitAll
     public void save(Ingredient ingredient) {
             ingredientDao.save(ingredient);
     }
@@ -45,6 +49,7 @@ public class IngredientResource {
     @DELETE
     @UnitOfWork
     @Path("/{id}")
+    @PermitAll
     public void delete(@PathParam("id") long id) {
         Ingredient ingredient = findSafely(id);
         ingredientDao.delete(ingredient);
