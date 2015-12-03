@@ -1,8 +1,8 @@
 package inventory.resources;
 
 import com.google.common.collect.ImmutableList;
-import inventory.db.IngredientDao;
-import inventory.model.Ingredient;
+import inventory.db.HopDAO;
+import inventory.model.Hop;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
 import org.junit.Before;
@@ -23,22 +23,22 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class IngredientResourceTest {
+public class HopResourceTest {
 
-    private static final IngredientDao dao = mock(IngredientDao.class);
+    private static final HopDAO dao = mock(HopDAO.class);
 
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()
-            .addResource(new IngredientResource(dao))
+            .addResource(new HopResource(dao))
             .build();
 
-    private Optional<Ingredient> optional;
+    private Optional<Hop> optional;
 
     @Before
     public void setUp() throws Exception {
-        Ingredient ingredient = new Ingredient("Amarillo", Ingredient.IngredientType.HOP);
-        ingredient.setId(1);
-        optional = Optional.of(ingredient);
+        Hop hop = new Hop("Amarillo", 12.0, Hop.HopType.PELLET, 200);
+        hop.setId(1);
+        optional = Optional.of(hop);
 
         when(dao.findById(anyLong())).thenReturn(optional);
 
@@ -50,21 +50,21 @@ public class IngredientResourceTest {
     }
 
     @Test
-    public void testFindIngredient() throws Exception {
-        assertThat(resources.client().target("/ingredients/1").request().get(Ingredient.class))
+    public void testFindHop() throws Exception {
+        assertThat(resources.client().target("/hops/1").request().get(Hop.class))
                 .isEqualTo(optional.get());
         verify(dao).findById(1);
     }
 
     @Test
     public void testFindAll() throws Exception {
-        ImmutableList<Ingredient> ingredients = ImmutableList.of(optional.get());
-        when(dao.findAll()).thenReturn(ingredients);
+        ImmutableList<Hop> hops = ImmutableList.of(optional.get());
+        when(dao.findAll()).thenReturn(hops);
 
-        List<Ingredient> response = resources.client().target("/ingredients")
-                .request().get(new GenericType<List<Ingredient>>() {});
+        List<Hop> response = resources.client().target("/hops")
+                .request().get(new GenericType<List<Hop>>() {});
 
         verify(dao).findAll();
-        assertThat(response).containsAll(ingredients);
+        assertThat(response).containsAll(hops);
     }
 }

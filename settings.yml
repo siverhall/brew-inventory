@@ -3,14 +3,19 @@ database:
 
   # the name of your JDBC driver
   driverClass: com.mysql.jdbc.Driver
-  user: user
-  password: pass
-  url: jdbc:mysql://localhost/db
+  user: brew-inv
+  password: s3cr3t
+  url: jdbc:mysql://localhost:3306/brew-inventory
   properties:
     charSet: UTF-8
     hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
     hibernate.hbm2ddl.auto: update
     validationQuery: "SELECT 1"
+
+# Basic auth example
+
+login: siverhall
+password: m577NGes
 
 # use the simple server factory if you only want to run on a single port
 server:

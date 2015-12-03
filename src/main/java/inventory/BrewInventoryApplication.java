@@ -1,10 +1,10 @@
 package inventory;
 
 import inventory.auth.UserAuthenticator;
-import inventory.db.IngredientDao;
-import inventory.model.Ingredient;
+import inventory.db.HopDAO;
+import inventory.model.Hop;
 import inventory.model.User;
-import inventory.resources.IngredientResource;
+import inventory.resources.HopResource;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
@@ -15,7 +15,7 @@ import io.dropwizard.setup.Environment;
 
 public class BrewInventoryApplication extends Application<InventoryConfiguration> {
 
-    private final HibernateBundle<InventoryConfiguration> hibernate = new HibernateBundle<InventoryConfiguration>(Ingredient.class) {
+    private final HibernateBundle<InventoryConfiguration> hibernate = new HibernateBundle<InventoryConfiguration>(Hop.class) {
         public PooledDataSourceFactory getDataSourceFactory(InventoryConfiguration conf) {
             return conf.getDataSourceFactory();
         }
@@ -44,8 +44,7 @@ public class BrewInventoryApplication extends Application<InventoryConfiguration
                 .buildAuthFilter()
         ));
 
-        IngredientDao dao = new IngredientDao(hibernate.getSessionFactory());
-        env.jersey().register(new IngredientResource(dao));
-
+        HopDAO hopDAO = new HopDAO(hibernate.getSessionFactory());
+        env.jersey().register(new HopResource(hopDAO));
     }
 }
