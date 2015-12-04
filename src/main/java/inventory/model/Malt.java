@@ -12,10 +12,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NamedQueries({
-        @NamedQuery(name = "model.Hop.findAll",
-                query = "SELECT h FROM Hop h")
+        @NamedQuery(name = "model.Malt.findAll",
+                query = "SELECT m FROM Malt m")
 })
-public class Hop {
+public class Malt {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,19 +25,9 @@ public class Hop {
     private String name;
 
     @JsonProperty
-    private Double alpha;
-
-    @JsonProperty
-    @Enumerated(EnumType.STRING)
-    private HopType hopType;
-
-    @JsonProperty
     private int amount;
 
-    public enum HopType {
-        PELLET, WHOLE_LEAF
-    }
 
-    public Hop() {}
+    public Malt() {}
 
 }

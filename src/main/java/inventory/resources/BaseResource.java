@@ -19,7 +19,6 @@ public abstract class BaseResource<T> {
     @GET
     @Path("/{id}")
     @UnitOfWork
-    @Timed
     @PermitAll
     public T getOne(@PathParam("id") long id) {
         return findSafely(id);
@@ -27,7 +26,6 @@ public abstract class BaseResource<T> {
 
     @POST
     @UnitOfWork
-    @Timed
     @PermitAll
     public void save(T entity) {
         dao.save(entity);

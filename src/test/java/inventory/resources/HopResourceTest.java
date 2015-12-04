@@ -36,7 +36,7 @@ public class HopResourceTest {
 
     @Before
     public void setUp() throws Exception {
-        Hop hop = new Hop("Amarillo", 12.0, Hop.HopType.PELLET, 200);
+        Hop hop = createHop();
         hop.setId(1);
         optional = Optional.of(hop);
 
@@ -66,5 +66,15 @@ public class HopResourceTest {
 
         verify(dao).findAll();
         assertThat(response).containsAll(hops);
+    }
+
+    private Hop createHop() {
+        Hop hop = new Hop();
+        hop.setId(1);
+        hop.setAlpha(12.0);
+        hop.setName("Amarillo");
+        hop.setAmount(30);
+        hop.setHopType(Hop.HopType.PELLET);
+        return hop;
     }
 }

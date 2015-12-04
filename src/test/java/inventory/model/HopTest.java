@@ -1,33 +1,25 @@
 package inventory.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.dropwizard.jackson.Jackson;
-import org.junit.Ignore;
-import org.junit.Test;
+public class HopTest extends JSONTest<Hop> {
 
-import static io.dropwizard.testing.FixtureHelpers.fixture;
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class HopTest {
-
-    private static final ObjectMapper MAPPER = Jackson.newObjectMapper();
-
-    @Test
-    public void serializesToJSON() throws Exception {
-        String expected = MAPPER.writeValueAsString(MAPPER.readValue(fixture("fixtures/hop.json"), Hop.class));
-
-        assertThat(MAPPER.writeValueAsString(getHop())).isEqualTo(expected);
+    @Override
+    protected Class<Hop> getClazz() {
+        return Hop.class;
     }
 
-    @Test
-    public void deserializesFromJSON() throws Exception {
-        assertThat(MAPPER.readValue(fixture("fixtures/hop.json"), Hop.class))
-                .isEqualTo(getHop());
+    @Override
+    protected String getFixture() {
+        return "fixtures/hop.json";
     }
 
-    private Hop getHop() {
-        Hop hop = new Hop("Amarillo", 12.0, Hop.HopType.PELLET, 200);
+    @Override
+    protected Hop createObject() {
+        Hop hop = new Hop();
         hop.setId(1);
+        hop.setAlpha(12.0);
+        hop.setName("Amarillo");
+        hop.setAmount(200);
+        hop.setHopType(Hop.HopType.PELLET);
         return hop;
     }
 }
