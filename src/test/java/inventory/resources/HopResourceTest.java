@@ -1,7 +1,7 @@
 package inventory.resources;
 
 import com.google.common.collect.ImmutableList;
-import inventory.db.HopDAO;
+import inventory.db.IngredientDAO;
 import inventory.model.Hop;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class HopResourceTest {
 
-    private static final HopDAO dao = mock(HopDAO.class);
+    private static final IngredientDAO dao = mock(IngredientDAO.class);
 
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()

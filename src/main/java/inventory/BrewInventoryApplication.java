@@ -1,9 +1,7 @@
 package inventory;
 
 import inventory.auth.UserAuthenticator;
-import inventory.db.HopDAO;
-import inventory.db.MaltDAO;
-import inventory.db.YeastDAO;
+import inventory.db.IngredientDAO;
 import inventory.model.Hop;
 import inventory.model.Malt;
 import inventory.model.User;
@@ -51,9 +49,9 @@ public class BrewInventoryApplication extends Application<InventoryConfiguration
                 .buildAuthFilter()
         ));
 
-        HopDAO hopDAO = new HopDAO(hibernate.getSessionFactory());
-        YeastDAO yeastDAO = new YeastDAO(hibernate.getSessionFactory());
-        MaltDAO maltDAO = new MaltDAO(hibernate.getSessionFactory());
+        IngredientDAO<Malt> maltDAO = new IngredientDAO<Malt>(hibernate.getSessionFactory(), Malt.class);
+        IngredientDAO<Hop> hopDAO = new IngredientDAO<Hop>(hibernate.getSessionFactory(), Hop.class);
+        IngredientDAO<Yeast> yeastDAO = new IngredientDAO<Yeast>(hibernate.getSessionFactory(), Yeast.class);
         env.jersey().register(new HopResource(hopDAO));
         env.jersey().register(new YeastResource(yeastDAO));
         env.jersey().register(new MaltResource(maltDAO));

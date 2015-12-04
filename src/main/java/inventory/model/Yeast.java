@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NamedQueries({
-        @NamedQuery(name = "model.Yeast.findAll",
+        @NamedQuery(name = "inventory.model.Yeast.findAll",
                 query = "SELECT y FROM Yeast y")
 })
 public class Yeast {

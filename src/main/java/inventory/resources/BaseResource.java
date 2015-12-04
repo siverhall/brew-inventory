@@ -1,18 +1,18 @@
 package inventory.resources;
 
-import com.codahale.metrics.annotation.Timed;
-import inventory.db.BaseDAO;
+import inventory.db.IngredientDAO;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.annotation.security.PermitAll;
 import javax.ws.rs.*;
+import java.util.List;
 import java.util.Optional;
 
 public abstract class BaseResource<T> {
 
-    private BaseDAO<T> dao;
+    private IngredientDAO<T> dao;
 
-    public BaseResource(BaseDAO<T> dao) {
+    public BaseResource(IngredientDAO<T> dao) {
         this.dao = dao;
     }
 
@@ -22,6 +22,13 @@ public abstract class BaseResource<T> {
     @PermitAll
     public T getOne(@PathParam("id") long id) {
         return findSafely(id);
+    }
+
+    @GET
+    @UnitOfWork
+    @PermitAll
+    public List<T> findAll() {
+        return dao.findAll();
     }
 
     @POST
